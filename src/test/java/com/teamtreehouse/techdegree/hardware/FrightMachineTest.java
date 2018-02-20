@@ -9,17 +9,29 @@ import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 
+import com.example.accessory.Horn;
+import com.example.accessory.Strobe;
+
 public class FrightMachineTest {
 
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
-
     private FrightMachine machine;
+    private Horn horn;
+    private Strobe strobe;
+    private Camera camera;
 
     @Before
     public void setUp() throws Exception {
         machine = new FrightMachine();
+        horn = new Horn();
+        strobe = new Strobe();
+        camera = new Camera();
+
+        machine.addObserver("horn", horn);
+        machine.addObserver("strobe", strobe);
+        machine.addObserver("camera", camera);
     }
 
     @Test
